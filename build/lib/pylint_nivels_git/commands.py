@@ -39,13 +39,14 @@ def run_pylint_nivels(git_diff, pylint_configuration_key):
 
     # Use the retrieved configuration file path in the pylint command
     pylint_executable = os.path.join(os.environ.get('VIRTUAL_ENV', ''), 'bin', 'pylint')
-    pylint_command = f"{pylint_executable} --load-plugins=pylint_odoo --rcfile={configuration_path} {git_diff_command} --output-format=colorized"
+    pylint_command = f"pylint --load-plugins=pylint_odoo --rcfile={configuration_path} {git_diff_command} --output-format=colorized"
 
     # Print the command for debugging
     print(f"Running command: {pylint_command}")
 
     # Execute the command
-    subprocess.run(pylint_command, shell=True, capture_output=True, text=True)
+    os.system(pylint_command)
+    # subprocess.run(pylint_command, shell=True, capture_output=True, text=True)
 
 
 def main():
