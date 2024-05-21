@@ -30,7 +30,7 @@ def run_pylint_nivels(git_diff, pylint_configuration_key):
         return
 
     # Get the list of Python files changed in the diff
-    git_diff_command = f"git diff --name-only --diff-filter=ACMRTUXB {git_diff} | grep -E '.py$'"
+    git_diff_command = f"$(git diff --name-only --diff-filter=ACMRTUXB {git_diff} | grep -E '(.py$)')"
     # git_files = subprocess.run(git_diff_command, shell=True, capture_output=True, text=True).stdout.strip()
 
     # if not git_files:
