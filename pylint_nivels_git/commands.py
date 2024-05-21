@@ -1,5 +1,6 @@
 import argparse
 import os
+import subprocess
 
 # Dictionary mapping keys to configuration file paths
 CONFIGURATION_PATHS = {
@@ -7,8 +8,6 @@ CONFIGURATION_PATHS = {
     'path_to_easy_peasy': 'configurations/.pylintrc_easy_peasy',
     # Add more configuration paths as needed
 }
-
-import os
 
 def run_pylint_nivels(pylint_configuration_key):
     # Check if the provided key exists in the configuration paths dictionary
@@ -30,14 +29,14 @@ def run_pylint_nivels(pylint_configuration_key):
         print(f"Error: Configuration file '{configuration_path}' not found.")
         return
 
-    git_files = os.popen("git diff --name-only --diff-filter=ACMRTUXB | grep  -E '.py$'").read()
+    git_files = os.popen("git diff --name-only --diff-filter=ACMRTUXB | grep -E '.py$'").read()
     if not git_files:
         exit(0)
 
     # Use the retrieved configuration file path in the pylint command
-    pylint_command = f"pylint --load-plugins=pylint_odoo --rcfile={configuration_path} {git_files} --output-format=colorized"
+    pylint_executable = os.path.join(os.environ['VIRTUAL_ENV'], 'bin', 'pylint')
+    pylint_command = f"{pylint_executable} --load-plugins=pylint_odoo --rcfile={configuration_path} {git_files} --output-format=colorized"
     os.system(pylint_command)
-
 
 def main():
     parser = argparse.ArgumentParser(description="Run pylint with custom configuration")

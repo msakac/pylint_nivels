@@ -6,6 +6,10 @@ setup(
     packages=find_packages(),
     package_data={'': ['configurations/*']},
     include_package_data=True,
+    install_requires=[
+        'pylint',
+        'pylint-odoo'
+    ],
     entry_points={
         "console_scripts": [
             "pylint_nivels=pylint_nivels_git.commands:main",

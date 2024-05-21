@@ -1,3 +1,5 @@
 Metadata-Version: 2.1
 Name: pylint_nivels_git
 Version: 1.0
+Requires-Dist: pylint
+Requires-Dist: pylint-odoo
