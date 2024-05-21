@@ -11,6 +11,7 @@ def run_pylint_nivels(pylint_configuration):
     os.system(pylint_command)
 
 def main():
+    print('hej im main')
     parser = argparse.ArgumentParser(description="Run pylint with custom configuration")
     parser.add_argument("pylint_configuration", help="Path to the pylint configuration file")
     args = parser.parse_args()
