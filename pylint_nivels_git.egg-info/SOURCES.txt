@@ -1,3 +1,4 @@
+MANIFEST.in
 setup.py
 pylint_nivels_git/__init__.py
 pylint_nivels_git/commands.py
@@ -6,3 +7,6 @@ pylint_nivels_git.egg-info/SOURCES.txt
 pylint_nivels_git.egg-info/dependency_links.txt
 pylint_nivels_git.egg-info/entry_points.txt
 pylint_nivels_git.egg-info/top_level.txt
+pylint_nivels_git/configurations/.pylintrc
+pylint_nivels_git/configurations/.pylintrc_easy_peasy
+pylint_nivels_git/configurations/.pylintrc_quality_nerd
