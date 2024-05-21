@@ -3,10 +3,11 @@ import os
 
 def run_pylint_nivels(pylint_configuration):
     git_files = os.popen("git diff --name-only --diff-filter=ACMRTUXB | grep  -E '.py$'").read()
+    print("Git files" + git_files)
     if not git_files:
         exit(0)
 
-    pylint_command = f"pylint --load-plugins=pylint_odoo --rcfile={pylint_configuration} {git_files} --output-format=colorized"
+    pylint_command = f"pylint --load-plugins=pylint_odoo --rcfile=configurations/{pylint_configuration} {git_files} --output-format=colorized"
     os.system(pylint_command)
 
 def main():
