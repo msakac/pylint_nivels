@@ -29,14 +29,24 @@ def run_pylint_nivels(pylint_configuration_key):
         print(f"Error: Configuration file '{configuration_path}' not found.")
         return
 
-    git_files = os.popen("git diff --name-only --diff-filter=ACMRTUXB | grep -E '.py$'").read()
+    git_files = os.popen("git diff --name-only --diff-filter=ACMRTUXB | grep -E '.py$'").read().strip()
     if not git_files:
+        print("No Python files to lint.")
         exit(0)
 
     # Use the retrieved configuration file path in the pylint command
-    pylint_executable = os.path.join(os.environ['VIRTUAL_ENV'], 'bin', 'pylint')
+    pylint_executable = os.path.join(os.environ.get('VIRTUAL_ENV', ''), 'bin', 'pylint')
     pylint_command = f"{pylint_executable} --load-plugins=pylint_odoo --rcfile={configuration_path} {git_files} --output-format=colorized"
-    os.system(pylint_command)
+    
+    # Print the command for debugging
+    print(f"Running command: {pylint_command}")
+
+    # Execute the command
+    result = subprocess.run(pylint_command, shell=True, capture_output=True, text=True)
+    
+    # Print the result
+    print(result.stdout)
+    print(result.stderr)
 
 def main():
     parser = argparse.ArgumentParser(description="Run pylint with custom configuration")
