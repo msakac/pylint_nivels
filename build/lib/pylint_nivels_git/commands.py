@@ -6,8 +6,16 @@ import logging
 CONFIGURATION_PATHS = {
     'pylintrc': 'configurations/.pylintrc',
     'pylintrc_easy_peasy': 'configurations/.pylintrc_easy_peasy',
-    'pylintrc__quality_nerd': 'configurations/.pylintrc_quality_nerd'
+    'pylintrc_quality_nerd': 'configurations/.pylintrc_quality_nerd',
+    'pylintrc_oca': 'configurations/.pylintrc_oca'
 }
+
+def get_git_diff_cmd(git_diff, pylint_config_key):
+    ''' Get the git diff command based on the configuration key. If linting oca then only lint files in oca directory
+    Else lint all python files in the diff excluding oca directory'''
+    if pylint_config_key == 'pylintrc_oca':
+        return f"$(git diff --name-only --diff-filter=ACMRTUXB {git_diff} | grep -E '(.py$)' | grep -E '^oca/')"
+    return f"$(git diff --name-only --diff-filter=ACMRTUXB {git_diff} | grep -E '(.py$)' | grep -vE '^oca/')"
 
 def run_pylint_nivels(git_diff, pylint_config_key):
     ''' Get the configuration file path from the key and run pylint with it '''
@@ -23,7 +31,8 @@ def run_pylint_nivels(git_diff, pylint_config_key):
         logging.error("Error: Configuration file %s not found.", configuration_path)
         return
 
-    git_diff_command = f"$(git diff --name-only --diff-filter=ACMRTUXB {git_diff} | grep -E '(.py$)')"
+    git_diff_command = get_git_diff_cmd(git_diff, pylint_config_key)
+
     pylint_command = f"pylint --load-plugins=pylint_odoo --rcfile={configuration_path} {git_diff_command} --output-format=colorized"
     os.system(pylint_command)
 

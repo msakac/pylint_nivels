@@ -10,4 +10,5 @@ pylint_nivels_git.egg-info/requires.txt
 pylint_nivels_git.egg-info/top_level.txt
 pylint_nivels_git/configurations/.pylintrc
 pylint_nivels_git/configurations/.pylintrc_easy_peasy
+pylint_nivels_git/configurations/.pylintrc_oca
 pylint_nivels_git/configurations/.pylintrc_quality_nerd
