@@ -1,6 +1,6 @@
 # pylint_nivels_git
 
-`pylint_nivels_git` is a custom Python package designed to run pylint with custom configurations. It's perfect for projects where there are multiple linting configurations which need to be checked. By using this package there we no longer need to copy configurations to each project.
+`pylint_nivels_git` is a custom Python package designed to run pylint with custom configurations. It's perfect for projects where there are multiple linting configurations which need to be checked. By using this package we no longer need to copy configurations to each project.
 
 ## Requirements
 
