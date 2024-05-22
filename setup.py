@@ -12,7 +12,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "pylint_nivels=pylint_nivels_git.commands:main",
+            "pylint-nivels=pylint_nivels_git.commands:main",
         ]
     },
 )
