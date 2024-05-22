@@ -11,8 +11,10 @@ CONFIGURATION_PATHS = {
 }
 
 def get_git_diff_cmd(git_diff, pylint_config_key):
-    ''' Get the git diff command based on the configuration key. If linting oca then only lint files in oca directory
-    Else lint all python files in the diff excluding oca directory'''
+    ''' Get the git diff command based on the configuration key.
+        - If linting oca then only lint files in oca directory
+        - Else lint all python files in the diff excluding oca directory
+    '''
     if pylint_config_key == 'pylintrc_oca':
         return f"$(git diff --name-only --diff-filter=ACMRTUXB {git_diff} | grep -E '(.py$)' | grep -E '^oca/')"
     return f"$(git diff --name-only --diff-filter=ACMRTUXB {git_diff} | grep -E '(.py$)' | grep -vE '^oca/')"
@@ -35,7 +37,6 @@ def run_pylint_nivels(git_diff, pylint_config_key):
 
     pylint_command = f"pylint --load-plugins=pylint_odoo --rcfile={configuration_path} {git_diff_command} --output-format=colorized"
     os.system(pylint_command)
-
 
 def main():
     ''' Parse command line arguments call method which runs pylint '''
