@@ -49,9 +49,3 @@ Please note that the `pylintrc_oca` configuration will only lint Python files in
 ## Contributing
 
 Changes and improvements are more than welcome! Please make your changes in a specific branch and request to pull into `main`!
-
-After making changes to the package, you need to build the package using the following command:
-
-```bash
-python setup.py sdist bdist_wheel
-```
