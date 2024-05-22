@@ -1,2 +1,0 @@
-[console_scripts]
-pylint-nivels = pylint_nivels_git.commands:main
